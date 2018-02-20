@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://base/generic/player_states/scripts/Standing.gd" type="Script" id=1]
+[ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
+
+[node name="Stand" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
+
+animationName = "Stand"
+
+
+[editable path="PlayerStateGround"]

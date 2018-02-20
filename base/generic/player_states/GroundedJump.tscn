@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://base/generic/player_states/super_generic/PlayerStateAir.tscn" type="PackedScene" id=1]
+
+[node name="GroundedJump" type="Node"]
+
+[node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 1 )]
+
+onLand = "Stand"
+
+[node name="PlayerStateBase" parent="PlayerStateAir" index="0"]
+
+animationName = "GroundedJump"
+onTimeout = "Null"
+
+
+[editable path="PlayerStateAir"]

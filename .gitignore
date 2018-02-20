@@ -1,15 +1,8 @@
-*.class
+# I think this is the Java gitignore I used for every other project
+# Oops
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.import/*
+*.import
 
 # =========================
 # Operating System Files
