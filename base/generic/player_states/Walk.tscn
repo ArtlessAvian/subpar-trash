@@ -10,14 +10,12 @@ script = ExtResource( 1 )
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
 walkable = false
-dashable = false
-initialVelocity = 100.0
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animationName = "Walk"
 customAnimationHandling = true
-accel = 300.0
+accel = 1600.0
 friction = 0.0
 
 

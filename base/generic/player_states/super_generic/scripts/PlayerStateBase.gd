@@ -43,6 +43,7 @@ export (String) var onTimeout
 export (int) var frameLength = -1
 export (float) var accel = 0
 export (float) var friction = -1
+export (float) var maxVelX = -1
 
 func enter(main, oldState):
 	if (animationName != null):
@@ -50,13 +51,13 @@ func enter(main, oldState):
 		main.get_node("AnimationPlayer").set_active(!customAnimationHandling)
 	
 	main.friction = self.friction
+	main.maxVelX = self.maxVelX
 
 func run(main, frame):
-	if (Input.is_action_pressed("ui_right") != Input.is_action_pressed("ui_left")):
-		if (Input.is_action_pressed("ui_left")):
-			main.accel.x -= accel
-		else:
-			main.accel.x += accel
+	if (main.get_node("Controller").is_mainstick_pointing(4)):
+		main.accel.x -= accel
+	elif (main.get_node("Controller").is_mainstick_pointing(0)):
+		main.accel.x += accel
 
 func try_transition(main, frame):
 	if (frame > frameLength && frameLength != -1):
@@ -64,4 +65,5 @@ func try_transition(main, frame):
 	pass
 
 func on_slide_off(main):
+	print("slid_off")
 	return "GroundedJump"

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=1]
+
+[node name="Dash" type="Node"]
+
+[node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 1 )]
+
+walkable = false
+dashable = false
+initialVelocity = 300.0
+
+[node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
+
+animationName = "Dash"
+onTimeout = "Stand"
+frameLength = 13
+accel = 1600.0
+
+
+[editable path="PlayerStateGround"]

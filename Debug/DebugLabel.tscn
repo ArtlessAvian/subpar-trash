@@ -19,7 +19,7 @@ func _process(delta):
 	for property in properties:
 		a = a.get(property)
 	
-	self.text = a;"
+	self.text = String(a)"
 
 [node name="DebugLabel" type="Label"]
 

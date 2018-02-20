@@ -17,12 +17,23 @@ func run(main, frame):
 	pass
 
 func try_transition(main, frame):
-	if (jumpable && Input.is_action_just_pressed("ui_up")):
+	if (jumpable && main.get_node("Controller").is_mainstick_pointing(2) && main.get_node("Controller").is_mainstick_banged()):
 		return "JumpSquat"
-	if (walkable && Input.is_action_just_pressed("ui_right")):
+	
+	if (jumpable && main.get_node("Controller").is_jump_pressed()):
+		return "JumpSquat"
+	
+	if (dashable && main.get_node("Controller").is_mainstick_pointing(0) && main.get_node("Controller").is_mainstick_banged()):
+		main.facingLeft = false
+		return "Dash"
+	if (dashable && main.get_node("Controller").is_mainstick_pointing(4) && main.get_node("Controller").is_mainstick_banged()):
+		main.facingLeft = true
+		return "Dash"
+	
+	if (walkable && main.get_node("Controller").is_mainstick_pointing(0)):
 		main.facingLeft = false
 		return "Walk"
-	if (walkable && Input.is_action_just_pressed("ui_left")):
+	if (walkable && main.get_node("Controller").is_mainstick_pointing(4)):
 		main.facingLeft = true
 		return "Walk"
 	pass

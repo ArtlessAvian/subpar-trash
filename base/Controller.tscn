@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://base/scripts/Controller.gd" type="Script" id=1]
+[ext_resource path="res://base/assets/Grid.png" type="Texture" id=2]
+
+[node name="Controller" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+device = -2
+
+[node name="MainStickZone" type="Sprite" parent="." index="0"]
+
+self_modulate = Color( 1, 1, 1, 0.193373 )
+position = Vector2( -160, 0 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="MainStick" type="Sprite" parent="MainStickZone" index="0"]
+
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Attack" type="Sprite" parent="." index="1"]
+
+modulate = Color( 0.5, 1, 0, 1 )
+position = Vector2( 64, 0 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Jump" type="Sprite" parent="." index="2"]
+
+position = Vector2( 0, 128 )
+scale = Vector2( 6, 1 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Special" type="Sprite" parent="." index="3"]
+
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 32, 64 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Shield" type="Sprite" parent="." index="4"]
+
+position = Vector2( 128, 0 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+

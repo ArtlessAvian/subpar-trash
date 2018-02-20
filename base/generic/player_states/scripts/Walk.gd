@@ -1,12 +1,14 @@
 extends Node
 
 func run(main, frame):
-	main.get_node("AnimationPlayer").advance(abs(main.lastVel.x) / main.maxVelX * 1/60)
-
+	main.get_node("AnimationPlayer").advance(abs(main.lastVel.x) / main.defaultMaxVelX * 1/60)
+	main.maxVelX = main.get_node("Controller").mainstick.length() * main.defaultMaxVelX
 
 func try_transition(main, frame):
-	if (!Input.is_action_pressed("ui_right") && !main.facingLeft):
+	if (!main.get_node("Controller").is_mainstick_pointing(0) && !main.facingLeft):
 		return "Stand"
-	if (!Input.is_action_pressed("ui_left") && main.facingLeft):
+	if (!main.get_node("Controller").is_mainstick_pointing(4) && main.facingLeft):
 		return "Stand"
-	
+
+func on_slide_off(main):
+	print("ahhh")

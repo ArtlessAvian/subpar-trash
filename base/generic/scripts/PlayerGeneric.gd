@@ -9,11 +9,12 @@ var lastVel;
 var vel = Vector2(0, 0)
 var accel = Vector2(0, 0)
 var friction = 0;
+var maxVelX = 0;
 
 export (float) var defaultFriction = 600;
-export (float) var maxVelX = 400
+export (float) var defaultMaxVelX = 400
 export (float) var maxVelY = 600
-export (float) var baseGravity = 600
+export (float) var baseGravity = 1600
 
 func _ready():
 	$PlayerStateMachine.current = $PlayerStateMachine.get_child(0)
@@ -21,23 +22,33 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	
+	prepare()
+	run()
+	move(delta)
+	done()
+
+#---------------------------------------
+
+func prepare():
 	lastVel = vel;
 	accel.x = 0
 	accel.y = 0
-	
-	# process input
+
+func run():
 	$PlayerStateMachine.run()
 	
-	accel.y += baseGravity
 	if (friction == -1):
 		friction = defaultFriction
+		
+	if (maxVelX == -1):
+		maxVelX = defaultMaxVelX
+
+func move(delta):
 	
-	# Move
-	
+	accel.y += baseGravity
 	if (grounded):
 		accel.x -= friction * sign(vel.x)
-		
+	
 	self.add_vel_x(accel.x * delta)
 	self.add_vel_y(accel.y * delta)
 	
@@ -48,16 +59,26 @@ func _physics_process(delta):
 	
 	if (!grounded && self.is_on_floor()):
 		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_land", [$"."])
+		grounded = true
 	elif (grounded && !self.is_on_floor()):
-		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_slide_off", [$"."])
-	grounded = self.is_on_floor()
+		if (self.test_move(self.transform, UP * -10)):
+			self.move_and_collide(UP * -10)
+			grounded = true
+		else:
+			$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_slide_off", [$"."])
+			grounded = false
 	
 	if (grounded):
 		vel.y = 0;
 	
-	if (self.position.y > 360): self.position.y -= 720
-	if (self.position.x > 480): self.position.x -= 960
-	if (self.position.x < -480): self.position.x += 960
+	if (self.position.y > 560): self.position.y -= 1120
+	if (self.position.x > 880): self.position.x -= 2560
+	if (self.position.x < -880): self.position.x += 2560
+
+func done():
+	pass
+
+#--------------------------------
 
 # not using this allows for exceeding the limits here
 

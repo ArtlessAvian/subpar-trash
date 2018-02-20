@@ -11,5 +11,6 @@ onTimeout = null
 frameLength = -1
 accel = 0
 friction = -1
+maxVelX = -1
 
 
