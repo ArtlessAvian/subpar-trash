@@ -9,6 +9,8 @@ script = ExtResource( 1 )
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
+dashable = false
+
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animationName = "Stand"

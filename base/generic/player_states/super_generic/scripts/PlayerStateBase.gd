@@ -23,6 +23,10 @@ extends Node
 # Called when landing on the ground
 #func on_land(main):
 #	pass
+
+# Called when sliding off on the ground
+#func on_slide_off(main):
+#	pass
 #
 # Called when hitting a ceiling
 #func on_pineapple(main):
@@ -34,14 +38,30 @@ extends Node
 
 
 export (String) var animationName
+export (bool) var customAnimationHandling
 export (String) var onTimeout
 export (int) var frameLength = -1
+export (float) var accel = 0
+export (float) var friction = -1
 
 func enter(main, oldState):
 	if (animationName != null):
-		main.get_node("AnimationPlayer").play(animationName)
+		main.get_node("AnimationPlayer").set_current_animation(animationName)
+		main.get_node("AnimationPlayer").set_active(!customAnimationHandling)
+	
+	main.friction = self.friction
+
+func run(main, frame):
+	if (Input.is_action_pressed("ui_right") != Input.is_action_pressed("ui_left")):
+		if (Input.is_action_pressed("ui_left")):
+			main.accel.x -= accel
+		else:
+			main.accel.x += accel
 
 func try_transition(main, frame):
 	if (frame > frameLength && frameLength != -1):
 		return onTimeout
 	pass
+
+func on_slide_off(main):
+	return "GroundedJump"

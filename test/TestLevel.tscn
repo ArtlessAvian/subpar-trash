@@ -5,19 +5,15 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 488, 10 )
+extents = Vector2( 272, 66 )
 
 [node name="Node" type="Node"]
 
-[node name="CharacterExample" parent="." index="0" instance=ExtResource( 1 )]
+_sections_unfolded = [ "Rendering" ]
 
-[node name="PlayerGeneric" parent="CharacterExample" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
-position = Vector2( 348, 329 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
-
-position = Vector2( 434, 575 )
+position = Vector2( 396, 715 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -28,7 +24,55 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
+position = Vector2( -409, -414 )
 shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="1"]
+
+position = Vector2( 498, 400 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0"]
+
+position = Vector2( -224, -162 )
+shape = SubResource( 1 )
+one_way_collision = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+[node name="CharacterExample" parent="." index="3" instance=ExtResource( 1 )]
 
 
 [editable path="CharacterExample"]

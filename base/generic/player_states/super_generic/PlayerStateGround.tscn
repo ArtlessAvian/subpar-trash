@@ -7,7 +7,12 @@
 
 script = ExtResource( 1 )
 jumpable = true
+walkable = true
+dashable = true
+initialVelocity = 0
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
+
+customAnimationHandling = null
 
 

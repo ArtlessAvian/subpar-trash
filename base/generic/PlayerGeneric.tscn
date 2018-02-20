@@ -1,36 +1,41 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://base/generic/scripts/PlayerGeneric.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/scripts/PlayerStateMachine.gd" type="Script" id=2]
 [ext_resource path="res://base/generic/player_states/GroundedJump.tscn" type="PackedScene" id=3]
-[ext_resource path="res://base/generic/player_states/Stand.tscn" type="PackedScene" id=4]
-[ext_resource path="res://base/generic/player_states/JumpSquat.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://base/generic/player_states/JumpSquat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://base/generic/player_states/Stand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://base/generic/player_states/Walk.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=7]
 
 [node name="PlayerGeneric" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
-collision/safe_margin = 0.08
+collision/safe_margin = 0.1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
+defaultFriction = 600
+maxVelX = 400
+maxVelY = 600
 baseGravity = 600
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="WorldCollision" type="CollisionShape2D" parent="." index="0"]
 
-[node name="WorldCollision" type="CollisionShape2D" parent="." index="1"]
-
-[node name="PlayerStateMachine" type="Node" parent="." index="2"]
+[node name="PlayerStateMachine" type="Node" parent="." index="1"]
 
 script = ExtResource( 2 )
 
 [node name="GroundedJump" parent="PlayerStateMachine" index="0" instance=ExtResource( 3 )]
 
-[node name="Stand" parent="PlayerStateMachine" index="1" instance=ExtResource( 4 )]
+[node name="JumpSquat" parent="PlayerStateMachine" index="1" instance=ExtResource( 4 )]
 
-[node name="JumpSquat" parent="PlayerStateMachine" index="2" instance=ExtResource( 5 )]
+[node name="Stand" parent="PlayerStateMachine" index="2" instance=ExtResource( 5 )]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="Walk" parent="PlayerStateMachine" index="3" instance=ExtResource( 6 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -40,7 +45,7 @@ playback_speed = 60.0
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="DebugLabel" parent="." index="4" instance=ExtResource( 6 )]
+[node name="DebugLabel" parent="." index="3" instance=ExtResource( 7 )]
 
 path = NodePath("../PlayerStateMachine")
 properties = [ "current", "name" ]

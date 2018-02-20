@@ -2,11 +2,14 @@
 
 [ext_resource path="res://base/generic/player_states/super_generic/scripts/PlayerStateBase.gd" type="Script" id=1]
 
-[node name="PlayerStateBase" type="Node" index="0"]
+[node name="PlayerStateBase" type="Node"]
 
 script = ExtResource( 1 )
 animationName = null
+customAnimationHandling = null
 onTimeout = null
 frameLength = -1
+accel = 0
+friction = -1
 
 
