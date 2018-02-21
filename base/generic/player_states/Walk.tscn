@@ -9,12 +9,14 @@ script = ExtResource( 1 )
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
-walkable = false
+jumpable = true
+dashable = true
+crouchable = true
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
-animationName = "Walk"
-customAnimationHandling = true
+animation_name = "Walk"
+custom_animation_handling = true
 accel = 1600.0
 friction = 0.0
 

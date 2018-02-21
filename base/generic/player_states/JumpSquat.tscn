@@ -6,21 +6,16 @@
 [node name="JumpSquat" type="Node"]
 
 script = ExtResource( 1 )
-fullHop = 750
-shortHop = 500
+full_hop = 750
+short_hop = 500
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
-jumpable = false
-walkable = false
-dashable = false
-
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
-animationName = "JumpSquat"
-onTimeout = "GroundedJump"
-frameLength = 5
-maxVelX = -1
+animation_name = "JumpSquat"
+on_timeout = "GroundedJump"
+frame_length = 5
 
 
 [editable path="PlayerStateGround"]

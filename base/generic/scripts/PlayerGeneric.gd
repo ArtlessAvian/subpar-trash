@@ -2,19 +2,18 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 
-var facingLeft = false
-var grounded = false
+export (float) var default_friction = 600
+export (float) var default_max_vel_x = 400
+export (float) var default_max_vel_y = 600
+export (float) var base_gravity = 1600
 
-var lastVel;
+var facing_left = false
+var grounded = false
 var vel = Vector2(0, 0)
 var accel = Vector2(0, 0)
-var friction = 0;
-var maxVelX = 0;
-
-export (float) var defaultFriction = 600;
-export (float) var defaultMaxVelX = 400
-export (float) var maxVelY = 600
-export (float) var baseGravity = 1600
+var friction = default_friction setget set_friction
+var max_vel_x = default_max_vel_x setget set_max_vel_x
+var max_vel_y = default_max_vel_y setget set_max_vel_y
 
 func _ready():
 	$PlayerStateMachine.current = $PlayerStateMachine.get_child(0)
@@ -30,31 +29,26 @@ func _physics_process(delta):
 #---------------------------------------
 
 func prepare():
-	lastVel = vel;
 	accel.x = 0
 	accel.y = 0
 
 func run():
 	$PlayerStateMachine.run()
-	
-	if (friction == -1):
-		friction = defaultFriction
-		
-	if (maxVelX == -1):
-		maxVelX = defaultMaxVelX
 
 func move(delta):
 	
 	if (grounded):
 		accel.x -= friction * sign(vel.x)
 	else:
-		accel.y += baseGravity
+		accel.y += base_gravity
 	
-	self.add_vel_x(accel.x * delta)
-	self.add_vel_y(accel.y * delta)
+	vel.x += accel.x * delta
+	vel.y += accel.y * delta
 	
 	if (abs(vel.x) < friction * delta/2):
 		vel.x = 0
+	vel.x = clamp(vel.x, -max_vel_x, max_vel_x)
+	vel.y = min(vel.y, max_vel_y)
 	
 	self.move_and_slide(vel, UP)
 	
@@ -77,32 +71,23 @@ func done():
 	if (self.position.x > 880): self.position.x -= 2560
 	if (self.position.x < -880): self.position.x += 2560
 	pass
-
-#--------------------------------
-
-# not using this allows for exceeding the limits here
-
-func set_vel_x(x):
-	if (vel.x > maxVelX):
-		if (x < vel.x):
-			vel.x = x
-	elif (vel.x < -maxVelX):
-		if (x > vel.x):
-			vel.x = x
-	else:
-		vel.x = clamp(x, -maxVelX, maxVelX)
-	pass
-
-
-func set_vel_y(y):
-	if (vel.y > maxVelY):
-		if (y < vel.y):
-			vel.y = y
-	else:
-		vel.y = min(y, maxVelY)
-
-func add_vel_x(dx):
-	self.set_vel_x(vel.x + dx)
 	
-func add_vel_y(dy):
-	self.set_vel_y(vel.y + dy)
+#------------------------------
+
+func set_friction(x):
+	if (friction == -1):
+		friction = default_friction
+	else:
+		friction = x
+
+func set_max_vel_x(x):
+	if (x == -1):
+		max_vel_x = default_max_vel_x
+	else:
+		max_vel_x = x
+
+func set_max_vel_y(y):
+	if (y == -1):
+		max_vel_y = default_max_vel_y
+	else:
+		max_vel_y = y

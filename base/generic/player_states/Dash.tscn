@@ -4,17 +4,15 @@
 
 [node name="Dash" type="Node"]
 
-[node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 1 )]
+_sections_unfolded = [ "Pause" ]
 
-walkable = false
-dashable = false
-initialVelocity = 300.0
+[node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 1 )]
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
-animationName = "Dash"
-onTimeout = "Stand"
-frameLength = 13
+animation_name = "Dash"
+on_timeout = "Stand"
+frame_length = 14
 accel = 1600.0
 
 

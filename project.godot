@@ -8,14 +8,14 @@
 
 config_version=3
 
-Aspect=0
+Aspect=null
 
 [Global]
 
-P 2 Device=0
-P 3 Device=1
-P 4 Device=2
-P 1 Device=-1
+P2Device=0
+P3Device=1
+P4Device=2
+P1Device=-1
 
 [application]
 
@@ -55,6 +55,10 @@ kb_attack=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name"
 kb_jump=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 kb_shield=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+debug_toggle_freeze=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":45,"unicode":0,"echo":false,"script":null)
+ ]
+debug_frame_advance=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"unicode":0,"echo":false,"script":null)
  ]
 
 [rendering]

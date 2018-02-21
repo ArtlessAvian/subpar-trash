@@ -3,6 +3,7 @@
 
 .import/*
 *.import
+junk/
 
 # =========================
 # Operating System Files
