@@ -6,8 +6,9 @@
 [node name="PlayerStateAir" type="Node"]
 
 script = ExtResource( 1 )
+airdodgeable = false
 onLand = "Stand"
-altGravity = null
+gravity = -1
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 

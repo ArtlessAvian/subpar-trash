@@ -5,20 +5,19 @@ export (bool) var walkable = false
 export (bool) var dashable = false
 export (bool) var crouchable = false
 
-export (float) var initial_velocity = 0
+var jump_buffered = false
 
-func enter(main, oldState):
+func enter(main, old_state):
 	main.grounded = true;
-	if (main.facing_left):
-		main.vel.x -= initial_velocity
-	else:
-		main.vel.x += initial_velocity
+	
+	jump_buffered = main.get_node("Controller").is_jump_pressed()
 
 func run(main, frame):
-	pass
+	if (jump_buffered):
+		jump_buffered = main.get_node("Controller").is_jump_pressed()
 
 func try_transition(main, frame):
-	if (jumpable && main.get_node("Controller").is_jump_pressed()):
+	if (jumpable && !jump_buffered && main.get_node("Controller").is_jump_pressed()):
 		return "JumpSquat"
 	
 	if (dashable && main.get_node("Controller").is_mainstick_pointing(0) && main.get_node("Controller").is_mainstick_banged()):

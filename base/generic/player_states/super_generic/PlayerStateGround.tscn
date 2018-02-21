@@ -10,7 +10,6 @@ jumpable = false
 walkable = false
 dashable = false
 crouchable = false
-initial_velocity = 0
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 

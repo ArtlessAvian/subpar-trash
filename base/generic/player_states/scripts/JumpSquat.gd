@@ -1,7 +1,7 @@
 extends Node
 
-export (float) var full_hop = 750
-export (float) var short_hop = 500
+export (float) var full_hop = 900
+export (float) var short_hop = 600
 
 func exit(main, frame):
 	main.grounded = false

@@ -10,7 +10,6 @@ custom_animation_handling = false
 on_timeout = null
 frame_length = -1
 accel = 0
-friction = -1
-max_vel_x = -1.0
+stick_max_vel = 0
 
 

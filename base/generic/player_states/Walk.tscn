@@ -17,8 +17,8 @@ crouchable = true
 
 animation_name = "Walk"
 custom_animation_handling = true
-accel = 1600.0
-friction = 0.0
+accel = 1500.0
+stick_max_vel = 400.0
 
 
 [editable path="PlayerStateGround"]

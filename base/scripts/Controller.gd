@@ -39,10 +39,18 @@ func _physics_process(delta):
 		mainstick.y -= int(Input.is_action_pressed("kb_up"))
 		mainstick.y += int(Input.is_action_pressed("kb_down"))
 		
+		mainstick = mainstick.normalized()
 		
 	elif (device >= 0):
 		mainstick.x = Input.get_joy_axis(device, 0)
 		mainstick.y = Input.get_joy_axis(device, 1)
+		for dir in range(8):
+			if (is_mainstick_pointing(dir, PI/16)):
+				mainstick = DIRS[dir] * mainstick.length()
+				break
+		if (mainstick.length_squared() > edges * edges):
+			mainstick = mainstick.normalized()
+	
 	
 	if (mainstick.length_squared() <  deadzone * deadzone):
 		last_neutral = 0
@@ -61,7 +69,7 @@ func is_mainstick_banged():
 func is_mainstick_neutral():
 	return last_neutral == 0
 
-const dirs = [
+const DIRS = [
 	Vector2(1, 0),
 	Vector2(1, -1),
 	Vector2(0, -1),
@@ -71,9 +79,9 @@ const dirs = [
 	Vector2(0, 1), 
 	Vector2(1, 1), 
 ]
-func is_mainstick_pointing(angleEighths):
+func is_mainstick_pointing(angleEighths, within = PI/2 + angle_leeway):
 	if (is_mainstick_neutral()): return false
-	return abs(mainstick.angle_to(dirs[angleEighths])) < PI/4 + angle_leeway
+	return abs(mainstick.angle_to(DIRS[angleEighths])) < within/2
 
 func is_attack_pressed():
 	if (device == -1):
@@ -93,5 +101,14 @@ func is_jump_pressed():
 	if (device == -1):
 		return Input.is_action_pressed("kb_jump")
 	elif (device >= 0):
-		return Input.is_joy_button_pressed(device, JOY_BUTTON_3) || Input.is_joy_button_pressed(device, JOY_BUTTON_9)
+		return (Input.is_joy_button_pressed(device, JOY_BUTTON_3) ||
+				Input.is_joy_button_pressed(device, JOY_BUTTON_9))
+	return false
+
+func is_shield_pressed():
+	if (device == -1):
+		return Input.is_action_pressed("kb_shield")
+	elif (device >= 0):
+		return (Input.get_joy_axis(device, JOY_AXIS_6) > 0.5 ||
+				Input.get_joy_axis(device, JOY_AXIS_7) > 0.5)
 	return false

@@ -6,10 +6,13 @@
 
 [node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 1 )]
 
+airdodgeable = true
+
 [node name="PlayerStateBase" parent="PlayerStateAir" index="0"]
 
 animation_name = "GroundedJump"
-accel = 400.0
+accel = 600.0
+stick_max_vel = 400.0
 
 
 [editable path="PlayerStateAir"]

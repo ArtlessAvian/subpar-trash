@@ -1,12 +1,13 @@
 extends Node
 
-# Up to parent to initialize the current state
-var current = null
+var current
 
 # The 'frame'th time something has run
 var frame = -1
 
 func _ready():
+	current = self.get_child(0)
+	current.propagate_call("enter", [$"..", null], true)
 	pass
 
 func run():
@@ -17,11 +18,11 @@ func run():
 	current.propagate_call("run", [$"..", frame], true)
 	pass
 
-func set_state(newState):
-	var oldState = current
-	current.propagate_call("exit", [$"..", oldState], true)
-	current = newState
-	current.propagate_call("enter", [$"..", newState], true)
+func set_state(new_state):
+	var old_state = current
+	current.propagate_call("exit", [$"..", old_state], true)
+	current = new_state
+	current.propagate_call("enter", [$"..", new_state], true)
 	
 	frame = 0
 	pass
