@@ -4,7 +4,7 @@ export (int) var device = -2
 
 var deadzone = 0.2
 var edges = 0.7
-var angleLeeway = 0
+var angleLeeway = PI/4
 
 var lastNeutral = 0
 var mainstick = Vector2()
@@ -13,8 +13,6 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	pass
-
-var bangAnimation = 0
 
 func _process(delta):
 	$MainStickZone/MainStick.position = mainstick * $MainStickZone.texture.get_width()/2
@@ -52,8 +50,8 @@ func _physics_process(delta):
 		lastNeutral += 1
 
 func is_mainstick_banged():
-	if (device == -1 && Input.is_action_pressed("kb_bang")):
-		return true;
+	if (device == -1):
+		return Input.is_action_just_pressed("kb_bang");
 	
 	if (lastNeutral < 6 && mainstick.length_squared() > edges * edges):
 		return true;

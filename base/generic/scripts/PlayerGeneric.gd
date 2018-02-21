@@ -45,9 +45,10 @@ func run():
 
 func move(delta):
 	
-	accel.y += baseGravity
 	if (grounded):
 		accel.x -= friction * sign(vel.x)
+	else:
+		accel.y += baseGravity
 	
 	self.add_vel_x(accel.x * delta)
 	self.add_vel_y(accel.y * delta)
@@ -60,22 +61,21 @@ func move(delta):
 	if (!grounded && self.is_on_floor()):
 		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_land", [$"."])
 		grounded = true
+		vel.y = 0
 	elif (grounded && !self.is_on_floor()):
 		if (self.test_move(self.transform, UP * -10)):
 			self.move_and_collide(UP * -10)
 			grounded = true
+			vel.y = 0
 		else:
 			$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_slide_off", [$"."])
 			grounded = false
 	
-	if (grounded):
-		vel.y = 0;
-	
+
+func done():
 	if (self.position.y > 560): self.position.y -= 1120
 	if (self.position.x > 880): self.position.x -= 2560
 	if (self.position.x < -880): self.position.x += 2560
-
-func done():
 	pass
 
 #--------------------------------
