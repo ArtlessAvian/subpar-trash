@@ -12,7 +12,6 @@ airdodgeable = true
 [node name="PlayerStateBase" parent="PlayerStateAir" index="0"]
 
 animation_name = "GroundedJump"
-on_bonk = 1
 accel = 600.0
 stick_max_vel = 400.0
 

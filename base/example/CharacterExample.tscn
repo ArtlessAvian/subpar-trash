@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://base/generic/PlayerGeneric.tscn" type="PackedScene" id=1]
 [ext_resource path="res://base/assets/spritesheet test.png" type="Texture" id=2]
@@ -13,20 +13,25 @@ func _ready():
 	# Initialization here
 	pass
 
+var facing_left = false
+
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
-	$PlayerGeneric/Sprite.flip_h = $PlayerGeneric.facing_left
+	if (facing_left != $PlayerGeneric.facing_left):
+#		$PlayerGeneric.scale.x = 1 - 2 * int($PlayerGeneric.facing_left)
+		$PlayerGeneric.scale.x = -1
+		facing_left = $PlayerGeneric.facing_left
 	pass
 "
 
-[sub_resource type="CapsuleShape2D" id=11]
+[sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
 radius = 21.0
 height = 68.0
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 
 resource_name = "AirDodge"
 length = 1.0
@@ -45,7 +50,7 @@ tracks/0/keys = {
 "values": [ 24 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 
 resource_name = "Crouch"
 length = 1.0
@@ -64,7 +69,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 
 resource_name = "Dash"
 length = 11.0
@@ -83,7 +88,50 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
+
+resource_name = "FTilt"
+length = 15.0
+loop = false
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitboxes/0:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 5, 10 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitboxes/0:shape:extents")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 5, 15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, 10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 
 length = 1.0
 loop = false
@@ -101,7 +149,50 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
+
+resource_name = "Jab"
+length = 7.0
+loop = false
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitboxes/0:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitboxes/0:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 17, 37 ) ]
+}
+
+[sub_resource type="Animation" id=9]
 
 length = 1.0
 loop = false
@@ -119,7 +210,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 
 length = 1.0
 loop = false
@@ -137,7 +228,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 
 length = 30.0
 loop = true
@@ -155,6 +246,11 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12 ]
 }
 
+[sub_resource type="RectangleShape2D" id=12]
+
+custom_solver_bias = 0.0
+extents = Vector2( 17, 37 )
+
 [node name="CharacterExample" type="Node" index="0"]
 
 script = SubResource( 1 )
@@ -164,31 +260,42 @@ script = SubResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="PlayerGeneric" index="0"]
 
 position = Vector2( 0, -55 )
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Controller" parent="PlayerGeneric" index="1"]
 
-device = -1
+device = 0
 
 [node name="Sprite" type="Sprite" parent="PlayerGeneric" index="2"]
 
 position = Vector2( 0, -64 )
+rotation = 6.28319
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 vframes = 8
 hframes = 8
-_sections_unfolded = [ "Animation", "Transform", "Visibility" ]
+frame = 24
+_sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
 
 [node name="AnimationPlayer" parent="PlayerGeneric" index="4"]
 
-anims/AirDodge = SubResource( 8 )
-anims/Crouch = SubResource( 9 )
-anims/Dash = SubResource( 10 )
-anims/GroundedJump = SubResource( 4 )
-anims/JumpSquat = SubResource( 5 )
-anims/Stand = SubResource( 6 )
-anims/Walk = SubResource( 7 )
+anims/AirDodge = SubResource( 3 )
+anims/Crouch = SubResource( 4 )
+anims/Dash = SubResource( 5 )
+anims/FTilt = SubResource( 6 )
+anims/GroundedJump = SubResource( 7 )
+anims/Jab = SubResource( 8 )
+anims/JumpSquat = SubResource( 9 )
+anims/Stand = SubResource( 10 )
+anims/Walk = SubResource( 11 )
+
+[node name="0" type="CollisionShape2D" parent="PlayerGeneric/Hitboxes" index="0"]
+
+position = Vector2( 54, -42 )
+shape = SubResource( 12 )
 
 
 [editable path="PlayerGeneric"]
+[editable path="PlayerGeneric/PlayerStateMachine/Jab"]
+[editable path="PlayerGeneric/PlayerStateMachine/FTilt"]

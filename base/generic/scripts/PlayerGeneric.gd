@@ -17,6 +17,8 @@ var max_vel_y = default_max_vel_y setget set_max_vel_y
 
 func _ready():
 	self.move_and_slide(Vector2())
+#	$Hitboxes.set_collision_layer_bit(pow(2,10), true)
+#	$Hurtboxes.set_collision_mask_bit(pow(2,10), false)
 	pass
 
 func _physics_process(delta):

@@ -19,7 +19,6 @@ crouchable = true
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animation_name = "Dash"
-timeout_state = "Stand"
 on_bonk = 2
 bonk_state = "Stand"
 accel = 1500.0

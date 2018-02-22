@@ -44,11 +44,10 @@ extends Node
 ## Returns null if no change
 #func on_bonk(main, collision):
 #	pass
-
 export (String) var animation_name
 export (bool) var custom_animation_handling = false
 
-export (int, -1, 600) var frame_length = -1
+export (int, -1, 120) var frame_length = -1
 export (String) var timeout_state
 export (int, "Nothing", "Deflect", "Stop") var on_bonk
 export (String) var bonk_state
@@ -73,6 +72,8 @@ func enter(main, oldState):
 func exit(main, newState):
 	if (animation_name != null):
 		main.get_node("AnimationPlayer").advance(1e5)
+	for child in main.get_node("Hitboxes").get_children():
+		child.disabled = true
 
 func run(main, frame):
 	if (stick_max_vel > 0):

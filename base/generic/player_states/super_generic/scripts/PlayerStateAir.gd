@@ -1,5 +1,6 @@
 extends Node
 
+export (bool) var attackable = false
 export (bool) var double_jumpable = false
 export (bool) var airdodgeable = false
 export (String) var onLand = "Stand"

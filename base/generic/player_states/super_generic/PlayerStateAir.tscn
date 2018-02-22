@@ -6,13 +6,14 @@
 [node name="PlayerStateAir" type="Node"]
 
 script = ExtResource( 1 )
+attackable = false
+double_jumpable = false
 airdodgeable = false
 onLand = "Stand"
 gravity = -1
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 
-on_pineapple = 2
-pineapple_state = null
+on_bonk = 1
 
 

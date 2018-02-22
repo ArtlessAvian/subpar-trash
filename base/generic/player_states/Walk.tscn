@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
+attackable = true
 jumpable = true
 dashable = true
 crouchable = true

@@ -31,15 +31,14 @@ func _process(delta):
 func _physics_process(delta):
 	
 	if (device == -1):
-		mainstick.x = 0
-		mainstick.y = 0
-		
-		mainstick.x += int(Input.is_action_pressed("kb_right"))
-		mainstick.x -= int(Input.is_action_pressed("kb_left"))
-		mainstick.y -= int(Input.is_action_pressed("kb_up"))
-		mainstick.y += int(Input.is_action_pressed("kb_down"))
-		
-		mainstick = mainstick.normalized()
+		var temp = Vector2()
+
+		temp.x += int(Input.is_action_pressed("kb_right"))
+		temp.x -= int(Input.is_action_pressed("kb_left"))
+		temp.y -= int(Input.is_action_pressed("kb_up"))
+		temp.y += int(Input.is_action_pressed("kb_down"))
+		temp = temp.normalized()
+		mainstick = mainstick.linear_interpolate(temp, 0.2)
 		
 	elif (device >= 0):
 		mainstick.x = Input.get_joy_axis(device, 0)

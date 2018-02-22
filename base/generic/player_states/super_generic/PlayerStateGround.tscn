@@ -6,11 +6,14 @@
 [node name="PlayerStateGround" type="Node"]
 
 script = ExtResource( 1 )
+attackable = false
 jumpable = false
 walkable = false
 dashable = false
 crouchable = false
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
+
+on_bonk = 2
 
 

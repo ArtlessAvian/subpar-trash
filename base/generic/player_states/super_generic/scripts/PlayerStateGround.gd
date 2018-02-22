@@ -1,5 +1,6 @@
 extends Node
 
+export (bool) var attackable = false
 export (bool) var jumpable = false
 export (bool) var walkable = false
 export (bool) var dashable = false
@@ -17,6 +18,16 @@ func run(main, frame):
 		jump_buffered = main.get_node("Controller").is_jump_pressed()
 
 func try_transition(main, frame):
+	if (attackable && main.get_node("Controller").is_attack_pressed()):
+		if (main.get_node("Controller").is_mainstick_neutral()):
+			return "Jab"
+		if (main.get_node("Controller").is_mainstick_pointing(0)):
+			main.facing_left = false
+			return "FTilt"
+		if (main.get_node("Controller").is_mainstick_pointing(4)):
+			main.facing_left = true
+			return "FTilt"
+	
 	if (jumpable && !jump_buffered && main.get_node("Controller").is_jump_pressed()):
 		return "JumpSquat"
 	
