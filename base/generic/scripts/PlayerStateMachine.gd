@@ -40,3 +40,8 @@ func propagate_set_state(start, name, args = []):
 	
 	if (result != null):
 		self.set_state(self.get_node(result))
+	
+	## TODO: REMOVE THIS GARBAGE
+	if (self.find_node(name, false)):
+		printerr(name + " not found!!!!")
+		

@@ -70,6 +70,10 @@ func enter(main, oldState):
 	if (friction == -1):
 		self.friction = main.default_friction
 
+func exit(main, newState):
+	if (animation_name != null):
+		main.get_node("AnimationPlayer").advance(1e5)
+
 func run(main, frame):
 	if (stick_max_vel > 0):
 		target_vel_x = main.get_node("Controller").mainstick.x * stick_max_vel

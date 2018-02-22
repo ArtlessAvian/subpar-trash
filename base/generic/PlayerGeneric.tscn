@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://base/generic/scripts/PlayerGeneric.gd" type="Script" id=1]
 [ext_resource path="res://base/Controller.tscn" type="PackedScene" id=2]
@@ -9,9 +9,12 @@
 [ext_resource path="res://base/generic/player_states/Walk.tscn" type="PackedScene" id=7]
 [ext_resource path="res://base/generic/player_states/Dash.tscn" type="PackedScene" id=8]
 [ext_resource path="res://base/generic/player_states/AirDodge.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://base/generic/player_states/DoubleJump.tscn" type="PackedScene" id=10]
+[ext_resource path="res://base/generic/player_states/Run.tscn" type="PackedScene" id=11]
+[ext_resource path="res://base/generic/player_states/Crouch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=13]
 
-[node name="PlayerGeneric" type="KinematicBody2D" index="0"]
+[node name="PlayerGeneric" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 0
@@ -23,15 +26,15 @@ default_friction = 1200
 default_max_vel_x = 400
 default_max_vel_y = 800
 default_gravity = 1600
+max_double_jumps = 2
 
-[node name="WorldCollision" type="CollisionShape2D" parent="." index="0"]
-
-[node name="Controller" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Controller" parent="." index="0" instance=ExtResource( 2 )]
 
 position = Vector2( -3, -281 )
 
-[node name="PlayerStateMachine" type="Node" parent="." index="2"]
+[node name="PlayerStateMachine" type="Node" parent="." index="1"]
 
+editor/display_folded = true
 script = ExtResource( 3 )
 
 [node name="GroundedJump" parent="PlayerStateMachine" index="0" instance=ExtResource( 4 )]
@@ -46,7 +49,13 @@ script = ExtResource( 3 )
 
 [node name="AirDodge" parent="PlayerStateMachine" index="5" instance=ExtResource( 9 )]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="DoubleJump" parent="PlayerStateMachine" index="6" instance=ExtResource( 10 )]
+
+[node name="Run" parent="PlayerStateMachine" index="7" instance=ExtResource( 11 )]
+
+[node name="Crouch" parent="PlayerStateMachine" index="8" instance=ExtResource( 12 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -56,25 +65,58 @@ playback_speed = 60.0
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="DebugLabel" parent="." index="4" instance=ExtResource( 10 )]
+[node name="Hitboxes" type="Area2D" parent="." index="3"]
 
-path = NodePath("../PlayerStateMachine")
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Hurtboxes" type="Area2D" parent="." index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Node" type="Node" parent="." index="5"]
+
+editor/display_folded = true
+
+[node name="DebugLabel" parent="Node" index="0" instance=ExtResource( 13 )]
+
+path = NodePath("../../PlayerStateMachine")
 properties = [ "current", "name" ]
 
-[node name="DebugLabel3" parent="." index="5" instance=ExtResource( 10 )]
+[node name="DebugLabel3" parent="Node" index="1" instance=ExtResource( 13 )]
 
 margin_left = -51.0
 margin_top = 1.0
 margin_right = -11.0
 margin_bottom = 15.0
-path = NodePath("../PlayerStateMachine")
+path = NodePath("../../PlayerStateMachine")
 properties = [ "frame" ]
 
-[node name="DebugLabel2" parent="." index="6" instance=ExtResource( 10 )]
+[node name="DebugLabel2" parent="Node" index="2" instance=ExtResource( 13 )]
 
 margin_top = 16.0
 margin_bottom = 30.0
-path = NodePath("..")
+path = NodePath("../..")
 properties = [ "vel" ]
+
+[node name="DebugLabel4" parent="Node" index="3" instance=ExtResource( 13 )]
+
+margin_left = -1.0
+margin_top = 32.0
+margin_right = 39.0
+margin_bottom = 46.0
+path = NodePath("../..")
+properties = [ "double_jumps" ]
 
 

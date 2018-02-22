@@ -9,6 +9,7 @@ var jump_buffered = false
 
 func enter(main, old_state):
 	main.grounded = true;
+	main.double_jumps = main.max_double_jumps
 	jump_buffered = main.get_node("Controller").is_jump_pressed()
 
 func run(main, frame):
@@ -32,4 +33,7 @@ func try_transition(main, frame):
 	if (walkable && main.get_node("Controller").is_mainstick_pointing(4)):
 		main.facing_left = true
 		return "Walk"
+	
+	if (crouchable && main.get_node("Controller").mainstick.y > sqrt(2)/2):
+		return "Crouch"
 	pass

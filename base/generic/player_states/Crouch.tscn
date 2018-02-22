@@ -1,24 +1,19 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://base/generic/player_states/scripts/Walk.gd" type="Script" id=1]
+[ext_resource path="res://base/generic/player_states/scripts/Crouch.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
 
-[node name="Walk" type="Node"]
+[node name="Crouch" type="Node"]
 
 script = ExtResource( 1 )
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
-jumpable = true
 dashable = true
-crouchable = true
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
-animation_name = "Walk"
-custom_animation_handling = true
-accel = 1500.0
-stick_max_vel = 400.0
+animation_name = "Crouch"
 
 
 [editable path="PlayerStateGround"]

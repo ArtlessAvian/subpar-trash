@@ -6,6 +6,7 @@
 
 [node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 1 )]
 
+double_jumpable = true
 airdodgeable = true
 
 [node name="PlayerStateBase" parent="PlayerStateAir" index="0"]

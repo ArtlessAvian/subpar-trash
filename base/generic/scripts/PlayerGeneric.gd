@@ -6,7 +6,9 @@ export (float) var default_friction = 1200
 export (float) var default_max_vel_x = 400
 export (float) var default_max_vel_y = 800
 export (float) var default_gravity = 1600
+export (int) var max_double_jumps = 2
 
+var double_jumps = max_double_jumps
 var facing_left = false
 var grounded = false
 var vel = Vector2(0, 0)
