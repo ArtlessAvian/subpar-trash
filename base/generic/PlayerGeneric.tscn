@@ -11,7 +11,7 @@
 [ext_resource path="res://base/generic/player_states/AirDodge.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=10]
 
-[node name="PlayerGeneric" type="KinematicBody2D"]
+[node name="PlayerGeneric" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 0
@@ -19,7 +19,7 @@ collision_mask = 1
 collision/safe_margin = 0.1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
-default_friction = 600
+default_friction = 1200
 default_max_vel_x = 400
 default_max_vel_y = 800
 default_gravity = 1600
@@ -76,14 +76,5 @@ margin_top = 16.0
 margin_bottom = 30.0
 path = NodePath("..")
 properties = [ "vel" ]
-
-[node name="DebugLabel4" parent="." index="7" instance=ExtResource( 10 )]
-
-margin_left = -1.0
-margin_top = 31.0
-margin_right = 39.0
-margin_bottom = 45.0
-path = NodePath("..")
-properties = [ "grounded" ]
 
 

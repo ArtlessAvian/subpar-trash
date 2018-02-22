@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const UP = Vector2(0, -1)
 
-export (float) var default_friction = 600
+export (float) var default_friction = 1200
 export (float) var default_max_vel_x = 400
 export (float) var default_max_vel_y = 800
 export (float) var default_gravity = 1600
@@ -42,17 +42,21 @@ func move(delta):
 
 	vel.y = min(vel.y, max_vel_y)
 	
-	print(vel)
-	var collision = self.move_and_slide(vel, UP)
+#	print(vel)
+	self.move_and_slide(vel, UP)
 	
-	if (Input.is_action_just_pressed("debug_frame_advance")):
-		print(var2str(collision))
+	if (self.is_on_wall()):
+		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_bonk", [$".", self.get_slide_collision(0)])
 	
-	if (!grounded && self.is_on_floor()):
-		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_land", [$"."])
+	if (self.is_on_ceiling()):
+		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_pineapple", [$".", self.get_slide_collision(0)])
+	
+	
+	if (self.is_on_floor()):
+		$PlayerStateMachine.propagate_set_state($PlayerStateMachine.current, "on_land", [$".", self.get_slide_collision(0)])
 		grounded = true
 		vel.y = 0
-	elif (grounded && !self.is_on_floor()):
+	elif (grounded):
 		if (self.test_move(self.transform, UP * -10)):
 			self.move_and_collide(UP * -10)
 			grounded = true
@@ -64,8 +68,8 @@ func move(delta):
 
 func done():
 	if (self.position.y > 560): self.position.y -= 1120
-	if (self.position.x > 880): self.position.x -= 2560
-	if (self.position.x < -880): self.position.x += 2560
+	if (self.position.x > 680): self.position.x -= 680 * 2
+	elif (self.position.x < -680): self.position.x += 680 * 2
 	pass
 	
 #------------------------------

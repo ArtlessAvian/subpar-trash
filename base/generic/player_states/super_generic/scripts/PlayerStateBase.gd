@@ -47,14 +47,19 @@ extends Node
 
 export (String) var animation_name
 export (bool) var custom_animation_handling = false
-export (String) var on_timeout
+
 export (int, -1, 600) var frame_length = -1
+export (String) var timeout_state
+export (int, "Nothing", "Deflect", "Stop") var on_bonk
+export (String) var bonk_state
+export (int, "Nothing", "Deflect", "Stop") var on_pineapple = 2
+export (String) var pineapple_state
+
 export (float, 0, 1e4) var accel = 0
 #export (float, -1, 1e4) var friction = -1
 var friction = -1
 
 export (float, 0, 1e4) var stick_max_vel = 0
-var lastRunMaxed
 var target_vel_x = 0 
 
 func enter(main, oldState):
@@ -81,10 +86,35 @@ func run(main, frame):
 			main.accel.x -= self.friction * sign(main.vel.x)
 
 func try_transition(main, frame):
-	if (frame > frame_length && frame_length != -1):
-		return on_timeout
+	if (frame_length != -1 && frame > frame_length):
+		if (timeout_state == null):
+			printerr("No Timeout State in " + main.get_node("PlayerStateMachine").current.name)
+		return timeout_state
 	pass
 
 func on_slide_off(main):
-	print("slid_off")
 	return "GroundedJump"
+
+func on_pineapple(main, collision):
+	match(on_pineapple):
+		1:
+			var sub = main.vel.length() * cos(main.vel.angle_to(collision.normal))
+			main.vel -= sub * collision.normal
+			print (sub * collision.normal)
+			print (main.vel)
+		2:
+			main.vel *= 0
+	if (pineapple_state != null):
+		return pineapple_state
+
+func on_bonk(main, collision):
+	match(on_bonk):
+		1:
+			var sub = main.vel.length() * cos(main.vel.angle_to(collision.normal))
+			main.vel -= sub * collision.normal
+			print (sub * collision.normal)
+			print (main.vel)
+		2:
+			main.vel *= 0
+	if (bonk_state != null):
+		return bonk_state

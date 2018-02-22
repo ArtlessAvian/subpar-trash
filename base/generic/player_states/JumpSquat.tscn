@@ -14,8 +14,8 @@ short_hop = 600
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animation_name = "JumpSquat"
-on_timeout = "GroundedJump"
 frame_length = 5
+timeout_state = "GroundedJump"
 
 
 [editable path="PlayerStateGround"]

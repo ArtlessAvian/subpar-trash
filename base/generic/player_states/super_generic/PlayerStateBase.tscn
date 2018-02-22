@@ -7,8 +7,12 @@
 script = ExtResource( 1 )
 animation_name = null
 custom_animation_handling = false
-on_timeout = null
 frame_length = -1
+timeout_state = null
+on_bonk = null
+bonk_state = null
+on_pineapple = 2
+pineapple_state = null
 accel = 0
 stick_max_vel = 0
 

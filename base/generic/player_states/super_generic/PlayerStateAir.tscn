@@ -12,4 +12,7 @@ gravity = -1
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 
+on_pineapple = 2
+pineapple_state = null
+
 

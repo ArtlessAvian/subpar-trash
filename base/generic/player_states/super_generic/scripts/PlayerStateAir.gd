@@ -16,5 +16,5 @@ func try_transition(main, frame):
 	if (airdodgeable && main.get_node("Controller").is_shield_pressed()):
 		return "AirDodge"
 
-func on_land(main):
+func on_land(main, collision):
 	return onLand

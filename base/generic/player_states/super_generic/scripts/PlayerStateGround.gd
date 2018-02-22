@@ -9,7 +9,6 @@ var jump_buffered = false
 
 func enter(main, old_state):
 	main.grounded = true;
-	
 	jump_buffered = main.get_node("Controller").is_jump_pressed()
 
 func run(main, frame):

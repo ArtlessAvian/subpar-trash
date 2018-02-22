@@ -17,6 +17,8 @@ crouchable = true
 
 animation_name = "Walk"
 custom_animation_handling = true
+on_pineapple = 2
+pineapple_state = null
 accel = 1500.0
 stick_max_vel = 400.0
 

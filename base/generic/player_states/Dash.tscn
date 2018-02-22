@@ -16,8 +16,12 @@ jumpable = true
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animation_name = "Dash"
-on_timeout = "Stand"
 frame_length = 14
+timeout_state = "Stand"
+on_bonk = 2
+bonk_state = "Stand"
+on_pineapple = 2
+pineapple_state = null
 accel = 1500.0
 stick_max_vel = 600.0
 
