@@ -14,6 +14,8 @@ var _jump_buffered
 var _fast_fall_buffered
 
 func enter(main, old_state):
+	main.ground = null;
+	
 	if (self.gravity == -1):
 		self.gravity = main.default_gravity
 	_jump_buffered = main.get_node("Controller").is_jump_pressed()
@@ -27,7 +29,7 @@ func enter(main, old_state):
 
 
 func run(main, frame):
-	main.accel.y += self.gravity
+	main.vel.y += self.gravity * 1/60
 	if (_jump_buffered):
 		_jump_buffered = main.get_node("Controller").is_jump_pressed()
 	
@@ -37,7 +39,6 @@ func run(main, frame):
 			main.vel.y = main.fast_fall
 	else:
 		_fast_fall_buffered = false
-		main.accel.y = gravity
 
 func try_transition(main, frame):
 	if (attackable && main.get_node("Controller").is_attack_pressed()):

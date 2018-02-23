@@ -60,5 +60,4 @@ func try_transition(main, frame):
 	pass
 
 func on_slide_off(main):
-	main.ground = null;
 	return "Fall"

@@ -3,10 +3,11 @@
 [ext_resource path="res://base/generic/player_states/scripts/DoubleJump.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateAir.tscn" type="PackedScene" id=2]
 
-[node name="DoubleJump" type="Node" index="0"]
+[node name="DoubleJump" type="Node"]
 
 script = ExtResource( 1 )
 jump_height = 600.0
+initial_velocity = 400
 
 [node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 2 )]
 

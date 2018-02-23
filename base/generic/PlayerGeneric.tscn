@@ -18,7 +18,7 @@
 [ext_resource path="res://base/generic/player_states/attack/PlayerStateAerial.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=17]
 
-[node name="PlayerGeneric" type="KinematicBody2D" index="0"]
+[node name="PlayerGeneric" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 0
@@ -46,6 +46,8 @@ script = ExtResource( 3 )
 
 [node name="GroundedJump" parent="PlayerStateMachine" index="0" instance=ExtResource( 4 )]
 
+initial_velocity = 400
+
 [node name="JumpSquat" parent="PlayerStateMachine" index="1" instance=ExtResource( 5 )]
 
 [node name="Stand" parent="PlayerStateMachine" index="2" instance=ExtResource( 6 )]
@@ -57,6 +59,8 @@ script = ExtResource( 3 )
 [node name="AirDodge" parent="PlayerStateMachine" index="5" instance=ExtResource( 9 )]
 
 [node name="DoubleJump" parent="PlayerStateMachine" index="6" instance=ExtResource( 10 )]
+
+initial_velocity = 400
 
 [node name="Run" parent="PlayerStateMachine" index="7" instance=ExtResource( 11 )]
 

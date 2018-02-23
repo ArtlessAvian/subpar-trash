@@ -8,6 +8,7 @@ var angle_leeway = PI/4
 
 var last_neutral = 0
 var mainstick = Vector2()
+var lastMainstick = Vector2()
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -29,6 +30,7 @@ func _process(delta):
 		$Jump.position.x += randf() * 10 - 5
 
 func _physics_process(delta):
+	lastMainstick = mainstick
 	
 	if (device == -1):
 		var temp = Vector2()
@@ -50,8 +52,10 @@ func _physics_process(delta):
 		if (mainstick.length_squared() > edges * edges):
 			mainstick = mainstick.normalized()
 	
-	
-	if (mainstick.length_squared() <  deadzone * deadzone):
+	if (mainstick.length_squared() < deadzone * deadzone):
+		last_neutral = 0
+	elif (mainstick.dot(lastMainstick) < 0 && 
+			abs(sin(mainstick.angle_to_point(lastMainstick)) * mainstick.length()) < deadzone/2):
 		last_neutral = 0
 	else:
 		last_neutral += 1

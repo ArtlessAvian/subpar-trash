@@ -16,7 +16,6 @@ var has_airdodged = false
 var facing_left = false
 var ground = null
 var vel = Vector2(0, 0)
-var accel = Vector2(0, 0)
 var max_vel_y = default_max_vel_y
 
 func _ready():
@@ -25,25 +24,26 @@ func _ready():
 	$Hurtboxes.set_collision_mask_bit(10, false)
 	pass
 
+var frozen
+
 func _physics_process(delta):
-	prepare()
-	run()
-	move(delta)
-	done()
+	if (Input.is_action_just_pressed("debug_toggle_freeze")):
+		frozen = !frozen
+	if (!frozen || Input.is_action_just_pressed("debug_frame_advance")):
+		prepare()
+		run()
+		move(delta)
+		done()
 
 #---------------------------------------
 
 func prepare():
-	accel.x = 0
-	accel.y = 0
+	pass
 
 func run():
 	$PlayerStateMachine.run()
 
 func move(delta):
-	
-	vel.x += accel.x * delta
-	vel.y += accel.y * delta
 	
 	if (vel.length() < 5):
 		vel *= 0

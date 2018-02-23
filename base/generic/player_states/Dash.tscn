@@ -8,6 +8,7 @@
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 initial_velocity = 600.0
+target_velocity = 600
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
@@ -20,7 +21,7 @@ animation_name = "Dash"
 frame_length = 14
 timeout_state = "Stand"
 bonk_state = "Stand"
-accel = 1500.0
+accel = 1600.0
 stick_max_vel = 600.0
 
 

@@ -3,11 +3,12 @@
 [ext_resource path="res://base/generic/player_states/scripts/GroundedJump.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateAir.tscn" type="PackedScene" id=2]
 
-[node name="GroundedJump" type="Node" index="0"]
+[node name="GroundedJump" type="Node"]
 
 script = ExtResource( 1 )
 full_hop = 900
 short_hop = 600
+initial_velocity = 400
 
 [node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 2 )]
 

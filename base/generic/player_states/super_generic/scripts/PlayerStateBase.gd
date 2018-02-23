@@ -24,7 +24,7 @@ extends Node
 #func exit(main, new_state):
 #	pass
 #
-## Change acceleration, velocity
+## Change velocity, alter things in the tree
 #func run(main, frame):
 #	pass
 #
@@ -72,7 +72,7 @@ export (String) var bonk_state
 export (int, "Nothing", "Deflect", "Stop") var on_pineapple = 2
 export (String) var pineapple_state
 
-export (float, -1, 1e4) var accel = 0
+export (float) var accel = 0
 #export (float, -1, 1e4) var friction = -1
 var friction = -1
 
@@ -103,26 +103,28 @@ func exit(main, newState):
 		else:
 			main.get_node("AnimationPlayer").advance(1e5)
 		
-		
 		for child in main.get_node("Hitboxes").get_children():
 			if (!child.disabled):
 				printerr(String(main.get_path_to(self)) + " forgot to clear hitboxes!")
-	pass
 
 func run(main, frame):
 	if (stick_max_vel > 0):
-		target_vel_x = main.get_node("Controller").mainstick.x * stick_max_vel
+		if (main.get_node("Controller").is_mainstick_neutral()):
+			target_vel_x = 0
+		else:
+			target_vel_x = main.get_node("Controller").mainstick.x * stick_max_vel
 	
-	if (abs(main.vel.x - target_vel_x) < 10):
-		main.vel.x = target_vel_x
-	else:		
-		if (target_vel_x < main.vel.x && main.get_node("Controller").is_mainstick_pointing(4)):
-			main.accel.x -= accel
-		elif (main.vel.x < target_vel_x && main.get_node("Controller").is_mainstick_pointing(0)):
-			main.accel.x += accel
-		
+	var before = main.vel.x > target_vel_x
+	
+	if (main.vel.x != target_vel_x):
 		if (abs(main.vel.x) > abs(target_vel_x) && main.vel.x * target_vel_x >= 0):
-			main.accel.x -= self.friction * sign(main.vel.x)
+			main.vel.x -= self.friction * sign(main.vel.x) * 1/60
+		elif (!main.get_node("Controller").is_mainstick_neutral()):
+			main.vel.x += sign(main.get_node("Controller").mainstick.x) * accel * 1/60
+	
+	var after = main.vel.x > target_vel_x
+	if (before != after):
+		main.vel.x = target_vel_x
 
 func try_transition(main, frame):
 	if (frame_length != -1 && frame > frame_length):
