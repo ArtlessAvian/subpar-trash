@@ -6,10 +6,10 @@
 [node name="JumpSquat" type="Node"]
 
 script = ExtResource( 1 )
-full_hop = 900
-short_hop = 600
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
+
+fall_throughable = false
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 

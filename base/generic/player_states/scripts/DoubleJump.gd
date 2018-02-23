@@ -14,3 +14,11 @@ export (float) var jump_height = 600
 func enter(main, oldState):
 	main.vel.y = -jump_height
 	main.double_jumps -= 1
+
+func run(main, frame):
+	main.set_collision_mask_bit(0,
+			main.get_node("Controller").mainstick.y < sqrt(2)/2)
+
+func try_transition(main, frame):
+	if (main.vel.y > 0):
+		return "Fall"

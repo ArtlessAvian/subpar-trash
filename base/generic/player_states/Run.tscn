@@ -14,12 +14,12 @@ __meta__ = {
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
 jumpable = true
+fall_throughable = true
 crouchable = true
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animation_name = "Dash"
-on_bonk = 2
 bonk_state = "Stand"
 accel = 1500.0
 stick_max_vel = 600.0

@@ -3,6 +3,7 @@ extends Node
 var dead_zoned = false
 
 func enter(main, old_state):
+	main.has_airdodged = true
 	if (main.get_node("Controller").is_mainstick_neutral()):
 		dead_zoned = true
 		$PlayerStateAir.gravity = -1;

@@ -8,8 +8,9 @@
 
 attackable = true
 jumpable = true
-walkable = true
 dashable = true
+walkable = true
+fall_throughable = true
 crouchable = true
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]

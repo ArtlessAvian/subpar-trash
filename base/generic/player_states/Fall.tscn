@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://base/generic/player_states/scripts/Fall.gd" type="Script" id=1]
+[ext_resource path="res://base/generic/player_states/super_generic/PlayerStateAir.tscn" type="PackedScene" id=2]
+
+[node name="Fall" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="PlayerStateAir" parent="." index="0" instance=ExtResource( 2 )]
+
+attackable = true
+double_jumpable = true
+airdodgeable = true
+
+[node name="PlayerStateBase" parent="PlayerStateAir" index="0"]
+
+animation_name = "Fall"
+
+
+[editable path="PlayerStateAir"]

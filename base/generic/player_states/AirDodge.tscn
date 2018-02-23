@@ -15,7 +15,6 @@ gravity = 0.0
 
 animation_name = "AirDodge"
 frame_length = 20
-timeout_state = "GroundedJump"
 on_bonk = 0
 on_pineapple = 0
 

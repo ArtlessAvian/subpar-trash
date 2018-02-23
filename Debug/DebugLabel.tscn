@@ -5,7 +5,7 @@
 script/source = "extends Label
 
 export (NodePath) var path
-export (Array) var properties
+export (Array, String) var properties
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -15,11 +15,14 @@ func _ready():
 func _process(delta):
 	
 	var a = self.get_node(path)
-	
+
 	for property in properties:
+		if (a == null): break
 		a = a.get(property)
 	
-	self.text = String(a)"
+	self.text = String(a)
+"
+_sections_unfolded = [ "Resource" ]
 
 [node name="DebugLabel" type="Label"]
 

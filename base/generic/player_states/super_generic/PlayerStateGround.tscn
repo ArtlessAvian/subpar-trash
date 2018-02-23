@@ -8,8 +8,9 @@
 script = ExtResource( 1 )
 attackable = false
 jumpable = false
-walkable = false
 dashable = false
+walkable = false
+fall_throughable = false
 crouchable = false
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]

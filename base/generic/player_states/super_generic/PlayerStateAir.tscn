@@ -14,6 +14,9 @@ gravity = -1
 
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 
+timeout_state = "Fall"
 on_bonk = 1
+accel = -1.0
+stick_max_vel = -1.0
 
 
