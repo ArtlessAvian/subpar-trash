@@ -4,6 +4,7 @@
 .import/*
 *.import
 junk/
+build/
 
 # =========================
 # Operating System Files

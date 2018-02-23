@@ -1,4 +1,4 @@
-extends Node
+extends "PlayerStateEmpty.gd"
 
 # This node is the endpoint for a chain of decorators.
 # A lot of this class could be implemented with even more decorators,
@@ -13,54 +13,6 @@ extends Node
 # to a state.
 # That said, try to avoid "God Classes" that do everything
 # This class is a borderline god class.
-
-
-### Interface. Maybe I should write an actual class to extend.
-## Called on any type of enter
-#func enter(main, old_state):
-#	pass
-#
-## Called on any type of exit
-#func exit(main, new_state):
-#	pass
-#
-## Change velocity, alter things in the tree
-#func run(main, frame):
-#	pass
-#
-## Called every frame, before run
-## Returns a State to change to
-## Returns null if no change
-## frame : integer
-##	The amount of frames that ran before this.
-##	EG: A 10 frame move should end if frame == 10
-#func try_transition(main, frame):
-#	pass
-#
-## Called when landing on the ground
-## Returns a State to change to
-## Returns null if no change
-#func on_land(main, collision):
-#	pass
-#
-## Called when sliding off on the ground
-## Returns a State to change to
-## Returns null if no change
-#func on_slide_off(main, collision):
-#	pass
-#
-## Called when hitting a ceiling
-## Returns a State to change to
-## Returns null if no change
-#func on_pineapple(main, collision):
-#	pass
-#
-## Called when hitting a wall
-## Returns a State to change to
-## Returns null if no change
-#func on_bonk(main, collision):
-#	pass
-
 
 export (String) var animation_name
 export (bool) var custom_animation_handling = false
