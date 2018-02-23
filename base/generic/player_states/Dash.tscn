@@ -3,7 +3,7 @@
 [ext_resource path="res://base/generic/player_states/scripts/Dash.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
 
-[node name="Dash" type="Node"]
+[node name="Dash" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]

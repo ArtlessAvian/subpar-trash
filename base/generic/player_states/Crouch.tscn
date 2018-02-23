@@ -3,7 +3,7 @@
 [ext_resource path="res://base/generic/player_states/scripts/Crouch.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
 
-[node name="Crouch" type="Node"]
+[node name="Crouch" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://base/generic/player_states/super_generic/scripts/PlayerStateBase.gd" type="Script" id=1]
 
-[node name="PlayerStateBase" type="Node"]
+[node name="PlayerStateBase" type="Node" index="0"]
 
 script = ExtResource( 1 )
 animation_name = null

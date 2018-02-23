@@ -34,7 +34,7 @@ func _physics_process(delta):
 	self.position.x += sin(time) * 2
 "
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 _sections_unfolded = [ "Rendering" ]
 __meta__ = {

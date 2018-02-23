@@ -3,7 +3,7 @@
 [ext_resource path="res://base/generic/player_states/scripts/AirDodge.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateAir.tscn" type="PackedScene" id=2]
 
-[node name="AirDodge" type="Node"]
+[node name="AirDodge" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

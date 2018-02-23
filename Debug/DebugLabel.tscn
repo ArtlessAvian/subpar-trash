@@ -24,7 +24,7 @@ func _process(delta):
 "
 _sections_unfolded = [ "Resource" ]
 
-[node name="DebugLabel" type="Label"]
+[node name="DebugLabel" type="Label" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
