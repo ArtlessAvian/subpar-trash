@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://base/generic/player_states/scripts/JumpSquat.gd" type="Script" id=1]
+[ext_resource path="res://base/generic/player_states/JumpSquat.gd" type="Script" id=1]
 [ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
+
 
 [node name="JumpSquat" type="Node" index="0"]
 

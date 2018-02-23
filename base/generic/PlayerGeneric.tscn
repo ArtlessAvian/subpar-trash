@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://base/generic/scripts/PlayerGeneric.gd" type="Script" id=1]
+[ext_resource path="res://base/generic/PlayerGeneric.gd" type="Script" id=1]
 [ext_resource path="res://base/Controller.tscn" type="PackedScene" id=2]
-[ext_resource path="res://base/generic/scripts/PlayerStateMachine.gd" type="Script" id=3]
+[ext_resource path="res://base/generic/PlayerStateMachine.gd" type="Script" id=3]
 [ext_resource path="res://base/generic/player_states/GroundedJump.tscn" type="PackedScene" id=4]
 [ext_resource path="res://base/generic/player_states/JumpSquat.tscn" type="PackedScene" id=5]
 [ext_resource path="res://base/generic/player_states/Stand.tscn" type="PackedScene" id=6]
@@ -17,6 +17,7 @@
 [ext_resource path="res://base/generic/player_states/attack/PlayerStateTilt.tscn" type="PackedScene" id=15]
 [ext_resource path="res://base/generic/player_states/attack/PlayerStateAerial.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Debug/DebugLabel.tscn" type="PackedScene" id=17]
+
 
 [node name="PlayerGeneric" type="KinematicBody2D"]
 
