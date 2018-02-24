@@ -42,8 +42,8 @@ func run(main, frame):
 
 func try_transition(main, frame):
 	if (attackable && main.get_node("Controller").is_attack_pressed()):
-		if (main.get_node("Controller").is_mainstick_neutral()):
-			return "Nair"
+#		if (main.get_node("Controller").is_mainstick_neutral()):
+		return "Nair"
 #		if (main.get_node("Controller").is_mainstick_pointing(0)):
 #			main.facing_left = false
 #			return "FTilt"
@@ -62,7 +62,8 @@ func on_land(main, collision):
 		main.ground = collision
 	
 	# Keep X
-	main.vel.y = -1 / tan(collision.normal.angle()) * main.vel.x
+#	main.vel.y = -1 / tan(collision.normal.angle()) * main.vel.x
+	main.vel.y = 0
 	
 	main.max_vel_y = main.default_max_vel_y
 	main.set_collision_mask_bit(0, true)

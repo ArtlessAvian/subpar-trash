@@ -40,7 +40,7 @@ func _physics_process(delta):
 		temp.y -= int(Input.is_action_pressed("kb_up"))
 		temp.y += int(Input.is_action_pressed("kb_down"))
 		temp = temp.normalized()
-		mainstick = mainstick.linear_interpolate(temp, 0.2)
+		mainstick = mainstick.linear_interpolate(temp, 1)
 		
 	elif (device >= 0):
 		mainstick.x = Input.get_joy_axis(device, 0)

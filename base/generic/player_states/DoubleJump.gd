@@ -1,7 +1,7 @@
 extends Node
 
 export (float) var jump_height = 600
-export (float) var initial_velocity = 400 # TODO, UN HARDCODE
+export (float) var initial_velocity = -1
 
 #func _ready():
 #	if (initial_velocity == -1):
@@ -17,7 +17,11 @@ export (float) var initial_velocity = 400 # TODO, UN HARDCODE
 func enter(main, oldState):
 	main.vel.y = -jump_height
 	main.double_jumps -= 1
-	 
+	
+	if (initial_velocity == -1):
+		yield()
+		initial_velocity = $PlayerStateAir/PlayerStateBase.stick_max_vel
+	
 	main.vel.x += main.get_node("Controller").mainstick.x * initial_velocity
 	main.vel.x = clamp(main.vel.x, -$PlayerStateAir/PlayerStateBase.stick_max_vel, $PlayerStateAir/PlayerStateBase.stick_max_vel)
 

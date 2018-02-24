@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://base/generic/PlayerGeneric.tscn" type="PackedScene" id=1]
 [ext_resource path="res://base/assets/spritesheet test.png" type="Texture" id=2]
@@ -69,7 +69,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 
 resource_name = "FTilt"
 length = 15.0
@@ -112,7 +112,7 @@ tracks/2/keys = {
 "values": [ Vector2( 10, 10 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=6]
 
 resource_name = "Fall"
 length = 1.0
@@ -131,7 +131,7 @@ tracks/0/keys = {
 "values": [ 3 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=7]
 
 resource_name = "FallThrough"
 length = 20.0
@@ -162,7 +162,7 @@ tracks/1/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 
 length = 1.0
 loop = false
@@ -180,9 +180,8 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 
-resource_name = "Jab"
 length = 7.0
 loop = false
 step = 1.0
@@ -194,67 +193,6 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 3, 6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 5, 6 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hitboxes/0:shape:extents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 3 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 17, 37 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-
-length = 1.0
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=13]
-
-resource_name = "Nair"
-length = 30.0
-loop = false
-step = 1.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Hitboxes/0:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3, 30 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -299,10 +237,71 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=11]
+
+resource_name = "Nair"
+length = 30.0
+loop = false
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Hitboxes/0:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 29 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitboxes/0:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 17, 37 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=13]
 
 length = 30.0
 loop = true
@@ -320,12 +319,17 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12 ]
 }
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=14]
 
 custom_solver_bias = 0.0
 extents = Vector2( 17, 37 )
 
-[node name="CharacterExample" type="Node" index="0"]
+[sub_resource type="RectangleShape2D" id=15]
+
+custom_solver_bias = 0.0
+extents = Vector2( 24, 47 )
+
+[node name="CharacterExample" type="Node"]
 
 script = SubResource( 1 )
 
@@ -356,21 +360,30 @@ _sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
 
 anims/AirDodge = SubResource( 3 )
 anims/Crouch = SubResource( 4 )
-anims/FTilt = SubResource( 6 )
-anims/Fall = SubResource( 14 )
-anims/FallThrough = SubResource( 15 )
-anims/GroundedJump = SubResource( 7 )
-anims/Jab = SubResource( 8 )
-anims/JumpSquat = SubResource( 9 )
-anims/Nair = SubResource( 13 )
-anims/Stand = SubResource( 10 )
-anims/Walk = SubResource( 11 )
+anims/FTilt = SubResource( 5 )
+anims/Fall = SubResource( 6 )
+anims/FallThrough = SubResource( 7 )
+anims/GroundedJump = SubResource( 8 )
+anims/Jab = SubResource( 9 )
+anims/JumpSquat = SubResource( 10 )
+anims/Nair = SubResource( 11 )
+anims/Stand = SubResource( 12 )
+anims/Walk = SubResource( 13 )
 
 [node name="0" type="CollisionShape2D" parent="PlayerGeneric/Hitboxes" index="0"]
 
 position = Vector2( 54, -42 )
-shape = SubResource( 12 )
+shape = SubResource( 14 )
 disabled = true
+
+[node name="0" type="CollisionShape2D" parent="PlayerGeneric/Hurtboxes" index="0"]
+
+position = Vector2( 0, -47 )
+shape = SubResource( 15 )
+
+[node name="Node" parent="PlayerGeneric" index="7"]
+
+editor/display_folded = true
 
 
 [editable path="PlayerGeneric"]

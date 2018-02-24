@@ -1,4 +1,4 @@
-extends "PlayerStateEmpty.gd"
+extends Node
 
 # This node is the endpoint for a chain of decorators.
 # A lot of this class could be implemented with even more decorators,
@@ -14,6 +14,54 @@ extends "PlayerStateEmpty.gd"
 # That said, try to avoid "God Classes" that do everything
 # This class is a borderline god class.
 
+
+### Interface.
+## Called on any type of enter
+#func enter(main, old_state):
+#	pass
+#
+## Called on any type of exit
+#func exit(main, new_state):
+#	pass
+#
+## Change velocity, alter things in the tree
+#func run(main, frame):
+#	pass
+#
+## Called every frame, before run
+## Returns a State to change to
+## Returns null if no change
+## frame : integer
+##	The amount of frames that ran before this.
+##	EG: A 10 frame move should end if frame == 10
+#func try_transition(main, frame):
+#	pass
+#
+## Called when landing on the ground
+## Returns a State to change to
+## Returns null if no change
+#func on_land(main, collision):
+#	pass
+#
+## Called when sliding off on the ground
+## Returns a State to change to
+## Returns null if no change
+#func on_slide_off(main, collision):
+#	pass
+#
+## Called when hitting a ceiling
+## Returns a State to change to
+## Returns null if no change
+#func on_pineapple(main, collision):
+#	pass
+#
+## Called when hitting a wall
+## Returns a State to change to
+## Returns null if no change
+#func on_bonk(main, collision):
+#	pass
+
+
 export (String) var animation_name
 export (bool) var custom_animation_handling = false
 
@@ -25,7 +73,7 @@ export (int, "Nothing", "Deflect", "Stop") var on_pineapple = 2
 export (String) var pineapple_state
 
 export (float) var accel = 0
-#export (float, -1, 1e4) var friction = -1
+export (bool) var do_friction = true
 var friction = -1
 
 export (float, -1, 1e4) var stick_max_vel = 0
@@ -54,10 +102,6 @@ func exit(main, newState):
 			main.get_node("AnimationPlayer").seek(0)
 		else:
 			main.get_node("AnimationPlayer").advance(1e5)
-		
-		for child in main.get_node("Hitboxes").get_children():
-			if (!child.disabled):
-				printerr(String(main.get_path_to(self)) + " forgot to clear hitboxes!")
 
 func run(main, frame):
 	if (stick_max_vel > 0):
@@ -70,7 +114,8 @@ func run(main, frame):
 	
 	if (main.vel.x != target_vel_x):
 		if (abs(main.vel.x) > abs(target_vel_x) && main.vel.x * target_vel_x >= 0):
-			main.vel.x -= self.friction * sign(main.vel.x) * 1/60
+			if (do_friction):
+				main.vel.x -= self.friction * sign(main.vel.x) * 1/60
 		elif (!main.get_node("Controller").is_mainstick_neutral()):
 			main.vel.x += sign(main.get_node("Controller").mainstick.x) * accel * 1/60
 	
