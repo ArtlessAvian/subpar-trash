@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://base/player/player_states/attack/Tilt.gd" type="Script" id=1]
+
+[node name="_Tilt" type="Node"]
+
+script = ExtResource( 1 )
+queue_animation = false
+stick_vel = 0
+accel = 0
+angle = null
+damage = null
+knockback = null
+knockback_growth = null
+
+

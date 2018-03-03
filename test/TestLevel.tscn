@@ -30,7 +30,7 @@ func _physics_process(delta):
 	self.position.x += cos(time) * 2
 "
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 _sections_unfolded = [ "Rendering" ]
 __meta__ = {
@@ -143,6 +143,16 @@ polygon = PoolVector2Array( -891.667, 88.8933, -891.667, -211.103, -807.109, -25
 
 [node name="CharacterExample3" parent="PlayerHandler" index="0" instance=ExtResource( 2 )]
 
+[node name="CharacterExample4" parent="PlayerHandler" index="1" instance=ExtResource( 2 )]
+
+[node name="Controller" parent="PlayerHandler/CharacterExample4/PlayerGeneric" index="4"]
+
+device = -1
+
+[node name="DoubleJump" parent="PlayerHandler/CharacterExample4/PlayerGeneric/StateMachine" index="9"]
+
+jump_height = 900
+
 [node name="Target" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( -116.326, 67.1396 )
@@ -156,3 +166,5 @@ position = Vector2( 102.894, 99.1396 )
 position = Vector2( 0, 116 )
 
 
+[editable path="PlayerHandler/CharacterExample4"]
+[editable path="PlayerHandler/CharacterExample4/PlayerGeneric"]

@@ -8,6 +8,7 @@ script/source = "extends Area2D
 
 func _physics_process(delta):
 	if (self.get_overlapping_areas().size() > 0):
+		print(\"hit!\")
 		self.free()"
 
 [sub_resource type="RectangleShape2D" id=2]

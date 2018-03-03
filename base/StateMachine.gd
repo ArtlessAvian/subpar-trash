@@ -19,6 +19,7 @@ func run(entity, delta):
 		self.on_timeout(entity, $AnimationPlayer.assigned_animation)
 	else:
 		$AnimationPlayer.advance(delta)
+		pass
 	
 	self.try_transition(entity, 0)
 	current.run(entity, delta)
@@ -41,6 +42,7 @@ func set_state(string):
 				# Skip to the end, when the animation should reset
 				$AnimationPlayer.seek($AnimationPlayer.current_animation_length, true)
 			$AnimationPlayer.play(string)
+			$AnimationPlayer.playback_active = false
 		
 		else:
 			printerr(string + " not found!!")

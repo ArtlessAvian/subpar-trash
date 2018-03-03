@@ -5,6 +5,7 @@
 [node name="JumpSquat" type="Node"]
 
 script = ExtResource( 1 )
+queue_animation = false
 stick_vel = 0
 accel = 0
 

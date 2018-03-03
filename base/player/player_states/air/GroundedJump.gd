@@ -1,7 +1,15 @@
 extends "../AirState.gd"
 
-func try_transition(entity, frame):
-	if (entity.vel.y >= 0):
-		return "Fall"
+func _ready():
+	_airdodgeable = true
+
+func enter(entity, new):
+	if (entity.get_node("Controller").is_jump_pressed()):
+		entity.vel.y = -1000;
+	else:
+		entity.vel.y = -600;
 	
-	return .try_transition(entity, frame)
+	.enter(entity, new)
+
+func on_timeout(entity, frame):
+	return "Fall"

@@ -322,7 +322,7 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=14]
 
 custom_solver_bias = 0.0
-extents = Vector2( 17, 37 )
+extents = Vector2( 0, 0 )
 
 [sub_resource type="RectangleShape2D" id=15]
 
@@ -353,8 +353,28 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 vframes = 8
 hframes = 8
-frame = 6
+frame = 7
 _sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
+
+[node name="StateMachine" parent="PlayerGeneric" index="3"]
+
+editor/display_folded = false
+
+[node name="PlayerStateBase" parent="PlayerGeneric/StateMachine/Jab/PlayerStateGround" index="0"]
+
+animation_name = "Jab"
+frame_length = 7
+
+[node name="PlayerStateBase" parent="PlayerGeneric/StateMachine/FTilt/PlayerStateGround" index="0"]
+
+animation_name = "FTilt"
+frame_length = 15
+
+[node name="PlayerStateBase" parent="PlayerGeneric/StateMachine/Nair/PlayerStateAir" index="0"]
+
+animation_name = "Nair"
+frame_length = 15
+do_friction = true
 
 [node name="AnimationPlayer" parent="PlayerGeneric" index="4"]
 
@@ -387,3 +407,9 @@ editor/display_folded = true
 
 
 [editable path="PlayerGeneric"]
+[editable path="PlayerGeneric/StateMachine/Jab"]
+[editable path="PlayerGeneric/StateMachine/Jab/PlayerStateGround"]
+[editable path="PlayerGeneric/StateMachine/FTilt"]
+[editable path="PlayerGeneric/StateMachine/FTilt/PlayerStateGround"]
+[editable path="PlayerGeneric/StateMachine/Nair"]
+[editable path="PlayerGeneric/StateMachine/Nair/PlayerStateAir"]

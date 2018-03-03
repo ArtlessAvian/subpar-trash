@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://base/player/player_states/air/DoubleJump.gd" type="Script" id=1]
+
+[node name="DoubleJump" type="Node" index="0"]
+
+script = ExtResource( 1 )
+queue_animation = false
+stick_vel = -1.0
+accel = -1.0
+jump_height = 900
+
+
