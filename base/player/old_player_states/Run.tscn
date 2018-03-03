@@ -1,28 +1,30 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://base/generic/player_states/Dash.gd" type="Script" id=1]
-[ext_resource path="res://base/generic/player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
+[ext_resource path="res://base/player/old_player_states/Run.gd" type="Script" id=1]
+[ext_resource path="res://base/player/old_player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
 
 
-[node name="Dash" type="Node" index="0"]
+
+
+[node name="Run" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
-initial_velocity = 600.0
-target_velocity = 600
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
 [node name="PlayerStateGround" parent="." index="0" instance=ExtResource( 2 )]
 
 jumpable = true
 fall_throughable = true
+crouchable = true
 
 [node name="PlayerStateBase" parent="PlayerStateGround" index="0"]
 
 animation_name = "Dash"
-frame_length = 14
-timeout_state = "Stand"
 bonk_state = "Stand"
-accel = 1600.0
+accel = 1500.0
 stick_max_vel = 600.0
 
 
