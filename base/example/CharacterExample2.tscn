@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://base/player/PlayerGeneric2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://base/assets/spritesheet test.png" type="Texture" id=2]
@@ -25,7 +25,38 @@ func _process(delta):
 	pass
 "
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
+
+resource_name = "Dash"
+length = 15.0
+loop = false
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
 
 resource_name = "Fall"
 length = 1.0
@@ -94,7 +125,7 @@ tracks/0/keys = {
 "values": [ 1, 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 
 resource_name = "Land"
 length = 15.0
@@ -113,9 +144,41 @@ tracks/0/keys = {
 "values": [ 1, 0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=11]
 
-resource_name = "Stand"
+resource_name = "Run"
+length = 25.0
+loop = true
+step = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5, 10, 15, 20, 25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 8 ]
+}
+
+[sub_resource type="Animation" id=12]
+
+resource_name = "RunBrake"
+length = 40.0
+loop = false
+step = 0.1
+
+[sub_resource type="Animation" id=13]
+
+resource_name = "RunTurnaround"
+length = 60.0
+loop = false
+step = 0.1
+
+[sub_resource type="Animation" id=8]
+
 length = 40.0
 loop = true
 step = 1.0
@@ -130,6 +193,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -64 ), Vector2( 0, -62 ), Vector2( 0, -64 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -165,34 +240,18 @@ script = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="PlayerGeneric/StateMachine" index="0"]
 
-anims/Fall = SubResource( 7 )
+anims/Dash = SubResource( 10 )
+anims/Fall = SubResource( 4 )
 anims/GroundedJump = SubResource( 5 )
 anims/JumpSquat = SubResource( 6 )
-anims/Land = SubResource( 8 )
-anims/Stand = SubResource( 4 )
+anims/Land = SubResource( 7 )
+anims/Run = SubResource( 11 )
+anims/RunBrake = SubResource( 12 )
+anims/RunTurnaround = SubResource( 13 )
+anims/Stand = SubResource( 8 )
 anims/Walk = SubResource( 9 )
 
-[node name="Fall" parent="PlayerGeneric/StateMachine" index="1"]
-
-queue_animation = false
-
-[node name="Stand" parent="PlayerGeneric/StateMachine" index="2"]
-
-queue_animation = false
-
-[node name="JumpSquat" parent="PlayerGeneric/StateMachine" index="3"]
-
-queue_animation = false
-
-[node name="GroundedJump" parent="PlayerGeneric/StateMachine" index="4"]
-
-queue_animation = false
-
-[node name="Land" parent="PlayerGeneric/StateMachine" index="5"]
-
-queue_animation = false
-
-[node name="Walk" parent="PlayerGeneric/StateMachine" index="6"]
+[node name="Fall" parent="PlayerGeneric/StateMachine" index="6"]
 
 queue_animation = false
 
@@ -205,12 +264,11 @@ _sections_unfolded = [ "Transform" ]
 [node name="Sprite" type="Sprite" parent="PlayerGeneric" index="5"]
 
 position = Vector2( 0, -64 )
-rotation = 12.5664
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 vframes = 8
 hframes = 8
-frame = 3
+frame = 8
 _sections_unfolded = [ "Animation", "Region", "Transform", "Visibility" ]
 
 

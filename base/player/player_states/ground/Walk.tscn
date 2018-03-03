@@ -2,11 +2,11 @@
 
 [ext_resource path="res://base/player/player_states/ground/Walk.gd" type="Script" id=1]
 
-[node name="Walk" type="Node"]
+[node name="Walk" type="Node" index="0"]
 
 script = ExtResource( 1 )
 queue_animation = false
-stick_vel = 400.0
-accel = 800.0
+stick_vel = 500.0
+accel = 2000.0
 
 
