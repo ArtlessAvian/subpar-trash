@@ -3,10 +3,7 @@
 [ext_resource path="res://base/player/old_player_states/super_generic/PlayerStateGround.gd" type="Script" id=1]
 [ext_resource path="res://base/player/old_player_states/super_generic/PlayerStateBase.tscn" type="PackedScene" id=2]
 
-
-
-
-[node name="PlayerStateGround" type="Node" index="0"]
+[node name="PlayerStateGround" type="Node"]
 
 script = ExtResource( 1 )
 attackable = false
@@ -19,5 +16,6 @@ crouchable = false
 [node name="PlayerStateBase" parent="." index="0" instance=ExtResource( 2 )]
 
 on_bonk = 2
+do_friction = true
 
 

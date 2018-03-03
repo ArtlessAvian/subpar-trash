@@ -3,9 +3,6 @@
 [ext_resource path="res://base/player/old_player_states/Walk.gd" type="Script" id=1]
 [ext_resource path="res://base/player/old_player_states/super_generic/PlayerStateGround.tscn" type="PackedScene" id=2]
 
-
-
-
 [node name="Walk" type="Node"]
 
 script = ExtResource( 1 )
@@ -23,6 +20,7 @@ crouchable = true
 animation_name = "Walk"
 custom_animation_handling = true
 accel = 1500.0
+do_friction = true
 stick_max_vel = 400.0
 
 

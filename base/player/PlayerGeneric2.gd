@@ -18,8 +18,8 @@ var facing_left = false
 var max_vel_y = default_max_vel_y
 
 func _ready():
-	$StateMachine.current = $StateMachine.find_node("Fall")
-	
+	$StateMachine.set_state("GroundedJump")
+
 	self.move_and_slide(Vector2())
 	$Hitboxes.set_collision_layer_bit(10 + team, true)
 	$Hurtboxes.set_collision_mask_bit(10 + team, false)
@@ -46,37 +46,7 @@ func prepare():
 
 func move(delta):
 	
-	if (vel.length() < 5):
-		vel *= 0
-	vel.y = min(vel.y, max_vel_y)
-	
-#	print(vel)
-	if (ground != null):
-		self.move_and_slide(vel + ground.collider_velocity, UP)
-	else:
-		self.move_and_slide(vel, UP)
-	
-	if (self.is_on_wall()):
-		$StateMachine.propagate_set_state("on_bonk", [$".", self.get_slide_collision(0)])
-	
-	if (self.is_on_ceiling()):
-		$StateMachine.propagate_set_state("on_pineapple", [$".", self.get_slide_collision(0)])
-	
-	if (self.is_on_floor() && ground == null):
-		# if vel.x == 0, then theres no collision????
-		# hack solution
-		var collision
-		if (self.get_slide_count() > 0):
-			collision = self.get_slide_collision(0)
-		else:
-			collision = self.move_and_collide(UP * -10)
-		
-		$StateMachine.propagate_set_state("on_land", [$".", collision])
-	if (ground != null):
-		if (self.test_move(self.transform, UP * -10)):
-			ground = self.move_and_collide(UP * -10)
-		else:
-			$StateMachine.propagate_set_state("on_slide_off", [$"."])
+	.move(delta)
 
 var _hit_response = null
 var _inside_hitboxes = {}
@@ -87,25 +57,25 @@ func check_hit():
 		_hit_response = "Launch"
 		_inside_hitboxes.erase(element)
 		# Modify the launch, i guess
-		
+
 
 func get_hit():
 	if (_hit_response != null):
 		$StateMachine.set_state($StateMachine.get_node(_hit_response))
 	_hit_response = null
 	pass
-
+#
 func done():
 	if (self.position.y > 560): self.position.y -= 1120
 	if (self.position.x > 680): self.position.x -= 680 * 2
 	elif (self.position.x < -680): self.position.x += 680 * 2
 	pass
-
-func _on_Hurtboxes_area_shape_entered(area_id, area, area_shape, self_shape):
-	print("oof")
-	if (!_inside_hitboxes.has(area)):
-		_inside_hitboxes.area = []
-	_inside_hitboxes.area.append(area_shape)
-
-func _on_Hurtboxes_area_shape_exited(area_id, area, area_shape, self_shape):
-	_inside_hitboxes.erase(area)
+#
+#func _on_Hurtboxes_area_shape_entered(area_id, area, area_shape, self_shape):
+#	print("oof")
+#	if (!_inside_hitboxes.has(area)):
+#		_inside_hitboxes.area = []
+#	_inside_hitboxes.area.append(area_shape)
+#
+#func _on_Hurtboxes_area_shape_exited(area_id, area, area_shape, self_shape):
+#	_inside_hitboxes.erase(area)

@@ -3,7 +3,6 @@
 [ext_resource path="res://base/player/PlayerGeneric.tscn" type="PackedScene" id=1]
 [ext_resource path="res://base/assets/spritesheet test.png" type="Texture" id=2]
 
-
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends Node
@@ -388,5 +387,3 @@ editor/display_folded = true
 
 
 [editable path="PlayerGeneric"]
-[editable path="PlayerGeneric/PlayerStateMachine/Jab"]
-[editable path="PlayerGeneric/PlayerStateMachine/FTilt"]

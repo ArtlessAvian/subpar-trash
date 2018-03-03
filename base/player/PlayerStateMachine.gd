@@ -9,7 +9,7 @@ func _ready():
 	current = self.get_child(0)
 	self.fancy_propagate_call("enter", [$"..", null])
 
-func run():
+func run(delta):
 	frame += 1
 	
 	self.propagate_set_state("try_transition", [$"..", frame])
