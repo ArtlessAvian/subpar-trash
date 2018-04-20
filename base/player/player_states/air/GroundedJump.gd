@@ -5,7 +5,7 @@ func _ready():
 
 func enter(entity, new):
 	if (entity.get_node("Controller").is_jump_pressed()):
-		entity.vel.y = -1000;
+		entity.vel.y = -800;
 	else:
 		entity.vel.y = -600;
 	

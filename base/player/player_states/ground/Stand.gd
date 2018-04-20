@@ -11,11 +11,11 @@ func enter(entity, delta):
 	
 	.enter(entity, delta)
 
-func run(entity, delta):
+func run(entity, frame, delta):
 	if (_jump_buffered):
 		_jump_buffered = entity.get_node("Controller").is_jump_pressed()
 	
-	.run(entity, delta)
+	.run(entity, frame, delta)
 
 func try_transition(entity, frame):
 	if (!_jump_buffered && entity.get_node("Controller").is_jump_pressed()):

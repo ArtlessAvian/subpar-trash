@@ -6,10 +6,10 @@ func enter(entity, old):
 func exit(entity, new):
 	pass
 
-func try_transition(entity, new):
+func try_transition(entity, frame):
 	pass
 
-func run(entity, delta):
+func run(entity, frame, delta):
 	pass
 
 # Called when the animation finishes

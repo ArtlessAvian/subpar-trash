@@ -1,9 +1,10 @@
 extends "../../EntityState.gd"
 
-export (bool) var queue_animation = false
+var queue_animation = false
 
 export (float) var stick_vel = 0
 export (float) var accel = 0
+var friction_multiplier = 1
 var target_vel_x = 0
 
 func enter(entity, old):
@@ -15,7 +16,7 @@ func exit(entity, new):
 func try_transition(entity, frame):
 	pass
 
-func run(entity, delta):
+func run(entity, frame, delta):
 	
 	if (stick_vel > 0):
 		if (entity.get_node("Controller").is_mainstick_neutral()):
@@ -27,10 +28,9 @@ func run(entity, delta):
 	
 	if (entity.vel.x != target_vel_x):
 		if (abs(entity.vel.x) > abs(target_vel_x) && entity.vel.x * target_vel_x >= 0):
-			if (true):
-				entity.vel.x -= entity.default_friction * sign(entity.vel.x) * 1/60
+			entity.vel.x -= entity.base_friction * friction_multiplier * sign(entity.vel.x) * delta
 		elif (!entity.get_node("Controller").is_mainstick_neutral()):
-			entity.vel.x += sign(entity.get_node("Controller").mainstick.x) * accel * 1/60
+			entity.vel.x += sign(entity.get_node("Controller").mainstick.x) * accel * delta
 	
 	var after = entity.vel.x > target_vel_x
 	if (before != after):

@@ -8,9 +8,5 @@ script = ExtResource( 1 )
 queue_animation = false
 stick_vel = 0
 accel = 0
-angle = null
-damage = null
-knockback = null
-knockback_growth = null
 
 

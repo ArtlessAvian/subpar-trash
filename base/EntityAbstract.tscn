@@ -6,11 +6,11 @@
 [node name="EntityAbstract" type="KinematicBody2D"]
 
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 0
+collision_mask = 3
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pause" ]
+_sections_unfolded = [ "Collision", "Pause" ]
 
 [node name="StateMachine" parent="." index="0" instance=ExtResource( 2 )]
 

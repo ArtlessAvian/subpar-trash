@@ -13,20 +13,30 @@ func _ready():
 func _physics_process(delta):
 	run(delta)
 	move(delta)
+	collide()
 
 #---------------------------------------
+func prepare():
+	pass
+
 func run(delta):
-	$StateMachine.run(self, delta)
+	$StateMachine.run(self, 0, delta)
 
 func move(delta):
-	
 	if (vel.length() < 5):
 		vel *= 0
 	
 	if (ground != null):
-		self.move_and_slide(vel.rotated(UP.angle_to(ground.normal)) + ground.collider_velocity, UP)
+		var temp = vel.rotated(UP.angle_to(ground.normal))
+		if (ground.collider.has_method("get_vel")):
+			temp += ground.collider.get_vel()
+			
+		self.move_and_slide(temp, UP)
+#		self.move_and_slide(vel.rotated(UP.angle_to(ground.normal)) + self.get_floor_velocity(), UP)
 	else:
 		self.move_and_slide(vel, UP)
+
+func collide():
 	
 	if (self.is_on_wall()):
 		$StateMachine.hit_wall(self, self.get_slide_collision(0))
@@ -46,7 +56,21 @@ func move(delta):
 		$StateMachine.hit_floor(self, collision)
 	if (ground != null):
 		if (self.test_move(self.transform, UP * -10)):
-			ground = self.move_and_collide(UP * -10)
-			pass
+			# Hack 2, prevents sliding down as much as possible
+			for i in range(-9, 0):
+				if (!self.test_move(self.transform, UP * i)):
+					ground = self.move_and_collide(UP * (i-1))
+					print(i)
 		else:
 			$StateMachine.on_slide_off(self)
+
+func done():
+	
+#	Lazy
+	if (self.position.length() > 1200):
+		self.position *= 0
+	
+#	if (self.position.y > 560): self.position.y -= 1120
+#	if (self.position.x > 680): self.position.x -= 680 * 2
+#	elif (self.position.x < -680): self.position.x += 680 * 2
+	pass

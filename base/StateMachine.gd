@@ -9,20 +9,20 @@ func _ready():
 		print(child.name)
 	pass
 
-func try_transition(entity, frame):
+func try_transition(entity, ignore_me):
 	var result = current.try_transition(entity, frame)
 	self.set_state(result)
 	return result
 	
-func run(entity, delta):
+func run(entity, ignore_me, delta):
 	if (!$AnimationPlayer.is_playing()):
 		self.on_timeout(entity, $AnimationPlayer.assigned_animation)
 	else:
 		$AnimationPlayer.advance(delta)
 		pass
 	
-	self.try_transition(entity, 0)
-	current.run(entity, delta)
+	self.try_transition(entity, frame)
+	current.run(entity, frame, delta)
 	frame += 1;
 
 func set_state(string):
@@ -30,7 +30,7 @@ func set_state(string):
 		var state = self.find_node("*" + string)
 		if (state != null):
 			if (current != null):
-				print(current.name + " --> " + state.name)
+#				print(current.name + " --> " + state.name)
 				current.exit($"..", state)
 			state.enter($"..", current)
 			current = state
@@ -41,7 +41,10 @@ func set_state(string):
 			elif ($AnimationPlayer.is_playing()):
 				# Skip to the end, when the animation should reset
 				$AnimationPlayer.seek($AnimationPlayer.current_animation_length, true)
-			$AnimationPlayer.play(string)
+			if ($AnimationPlayer.has_animation(string)):
+				$AnimationPlayer.play(string)
+			else:
+				$AnimationPlayer.play("Stand")
 			$AnimationPlayer.playback_active = false
 		
 		else:
@@ -53,7 +56,6 @@ func on_timeout(entity, animation):
 	return result
 
 func hit_floor(entity, collision):
-	print("ay")
 	var result = current.hit_floor(entity, collision)
 	self.set_state(result)
 	return result
